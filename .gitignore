@@ -1,0 +1,29 @@
+# Ignorar o ambiente virtual
+.venv/
+venv/
+
+# Arquivos de cache do Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Configurações locais do VSCode
+.vscode/
+
+# Arquivos temporários ou de sistema
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Arquivos CSV de dados (caso queira ignorar dados locais)
+*.csv
+
+# Arquivos específicos de SO
+ehthumbs.db
+Icon?
+
+# Arquivos de configuração do PyEnv
+python-version
+pyvenv.cfg
