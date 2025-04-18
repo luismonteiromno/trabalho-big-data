@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.ticker import FuncFormatter
+from utils import converter_colunas, formatar_percentual
 
 # Estilo visual mais limpo
 sns.set_style("whitegrid")
@@ -17,14 +18,6 @@ plt.rcParams.update({
 fiis_df = pd.read_csv('fiis.csv', sep=';')
 acoes_df = pd.read_csv('acoes.csv', sep=';')
 
-# Corrigir vírgulas e converter para float
-def converter_colunas(df):
-    df["DY"] = pd.to_numeric(df["DY"].astype(str).str.replace(",", "."), errors="coerce")
-    if "Liquidez" in df.columns:
-        df["Liquidez"] = pd.to_numeric(df["Liquidez"].astype(str).str.replace(".", "").str.replace(",", "."), errors="coerce")
-    if "Preço" in df.columns:
-        df["Preço"] = pd.to_numeric(df["Preço"].astype(str).str.replace(",", "."), errors="coerce")
-    return df
 
 fiis_df = converter_colunas(fiis_df)
 acoes_df = converter_colunas(acoes_df)
@@ -48,10 +41,6 @@ if "Preço" in acoes_df.columns:
 # Selecionar os top 10
 top_fiis = fiis_df.nlargest(10, "DY")[["TICKER", "DY"]]
 top_acoes = acoes_df.nlargest(10, "DY")[["TICKER", "DY"]]
-
-# Formato de porcentagem no eixo Y
-def formatar_percentual(x, pos):
-    return f'{x:.1f}%'
 
 # Plot
 fig, axes = plt.subplots(1, 2, figsize=(16, 7))
