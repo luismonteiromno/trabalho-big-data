@@ -4,6 +4,8 @@ import seaborn as sns
 from matplotlib.ticker import FuncFormatter
 from utils import converter_colunas, formatar_percentual
 
+# TODO - Fazer com que o gráfico retorne os 10 ativos mais seguros para os investidores iniciantes
+
 # Estilo visual mais limpo
 sns.set_style("whitegrid")
 plt.rcParams.update({
