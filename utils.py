@@ -1,8 +1,15 @@
 import pandas as pd
+from PIL.IcoImagePlugin import IcoFile
+
 
 # Corrigir vírgulas e converter para float
 def converter_colunas(df):
-    df["DY"] = pd.to_numeric(df["DY"].astype(str).str.replace(",", "."), errors="coerce")
+    numeric_cols = ['DY', 'P/L','P/VP', 'ROE', 'DIVIDA LIQUIDA / EBIT']
+    for column in numeric_cols:
+      col = next((col for col in df.columns.tolist() if column in col), None)
+      if col is not None:
+        df[col] = pd.to_numeric(df[col].astype(str).str.replace(",", "."), errors="coerce")
+
     if "Liquidez" in df.columns:
         df["Liquidez"] = pd.to_numeric(df["Liquidez"].astype(str).str.replace(".", "").str.replace(",", "."), errors="coerce")
     if "Preço" in df.columns:
